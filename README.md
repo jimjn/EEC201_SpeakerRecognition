@@ -45,6 +45,14 @@ After sampling, the signal undergoes amplitude normalization from -1 to 1 to acc
 
 Figure 1: Speaker 1 Time Domain Plot
 
+```
+    for k = 1:numFrames
+        frames(k,:) = s(startindex:endindex);
+        frames(k,:) = frames(k,:);
+        startindex = startindex+N-M;
+        endindex = startindex+N-1;
+```
+
 Windowing
 
 Once the signal is split into frames, a hamming window, shown below in Figure 2, is applied to each frame to taper the end samples to equal near-zero amplitudes. If the end samples are not tapered to the same amplitude, they will show up as unwanted high frequency components when processed frame by frame through the STFT, because the periodicity of the DFT causes it to treat the disconnected beginning and end points as a discontinuity.
