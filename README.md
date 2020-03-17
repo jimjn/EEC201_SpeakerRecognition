@@ -1,10 +1,11 @@
-**EEC 201
-Winter 2020
-Final Project
-Speaker Recognition
-James Nelson and Laura Shimabukuro**
+**EEC 201**
+**Winter 2020**
+**Final Project**
+**Speaker Recognition**
+**James Nelson and Laura Shimabukuro**
 
-<img align="center" src="images/image_0.jpg">
+<img align="center" width="300" height="100" src="images/image_0.jpg">
+
 # Objective
 
 The goal of this project is to extract features from human voices to build a system to classify a set of speakers.  Mel-Frequency Cepstrum Coefficients (MFCC) were used as features and Vector Quantization (VQ) was used as the training/classification system.
@@ -17,7 +18,7 @@ In order for the system to perform speech recognition, the key features of each 
 
 After sampling, the signal undergoes amplitude normalization from -1 to 1 to account for sound volume variations. The normalized signal is then split into approximately 30 ms frames (frame length N = 256) with a slight overlap (overlap M = 100) between adjacent frames. The frame overlaps prevent data loss during processing.
 
-<img align="center" src="images/image_1.jpg">
+<img align="center" width="400" height="400" src="images/image_1.jpg">
 
 **Figure 1: Speaker 1 Time Domain Plot**
 ```
@@ -35,7 +36,7 @@ Windowing
 
 Once the signal is split into frames, a hamming window, shown below in Figure 2, is applied to each frame to taper the end samples to equal near-zero amplitudes. If the end samples are not tapered to the same amplitude, they will show up as unwanted high frequency components when processed frame by frame through the STFT, because the periodicity of the DFT causes it to treat the disconnected beginning and end points as a discontinuity.
 
-![image alt text](images/image_2.png)
+<img align="center" width="400" height="400" src="images/image_2.jpg">
 
 **Figure 2: Hamming Window**
 ```
