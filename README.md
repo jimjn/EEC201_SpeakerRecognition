@@ -8,7 +8,7 @@ Speaker Recognition
 
 James Nelson and Laura Shimabukuro
 
-![image alt text](images/image_0.jpg)
+![image alt text](images/image_0.jpg width = "48")
 
 # Objective
 
@@ -25,7 +25,7 @@ After sampling, the signal undergoes amplitude normalization from -1 to 1 to acc
 ![image alt text](images/image_1.jpg)
 
 **Figure 1: Speaker 1 Time Domain Plot**
-
+```
 **   for k = 1:numFrames**
 
 **        frames(k,:) = s(startindex:endindex);**
@@ -35,7 +35,7 @@ After sampling, the signal undergoes amplitude normalization from -1 to 1 to acc
 **        startindex = startindex+N-M;**
 
 **        endindex = startindex+N-1;**
-
+```
 Windowing
 
 Once the signal is split into frames, a hamming window, shown below in Figure 2, is applied to each frame to taper the end samples to equal near-zero amplitudes. If the end samples are not tapered to the same amplitude, they will show up as unwanted high frequency components when processed frame by frame through the STFT, because the periodicity of the DFT causes it to treat the disconnected beginning and end points as a discontinuity.
@@ -43,9 +43,9 @@ Once the signal is split into frames, a hamming window, shown below in Figure 2,
 ![image alt text](images/image_2.png)
 
 **Figure 2: Hamming Window**
-
+```
 **y(k,:) = frames(****k****,:).*w';**
-
+```
 Periodogram Generation
 
 To estimate the spectral density of each signal, a periodogram estimate of the power spectral density is computed for each signal. First, the Short Time Fourier Transform is applied to each frame by taking an N length FFT of each frame and multiplying the output by a linear phase term to remove time normalization. The frame by frame output of the STFT is squared and averaged over the length of each frame.  Since it is realistically impossible to average the squared spectrum over an infinite interval, squaring over the frame length provides a suitable estimate for the PSD. After generating the frame by frame periodogram estimate, the full signal periodogram is computed by summing all of the individual frame periodograms together. The overlaps are taken into account by zero padding both sides of each frame vector to the correct length and position with respect to the original signal before the full summation. The output periodogram for speaker 1 is shown below in Figure 3.
@@ -53,7 +53,7 @@ To estimate the spectral density of each signal, a periodogram estimate of the p
 ![image alt text](images/image_3.png)
 
 **Figure 3: Speaker 1 Periodogram**
-
+``
 **frames_fft(k,:) = fft(y(k,:));**
 
 **% compute periodogram**
@@ -63,7 +63,7 @@ To estimate the spectral density of each signal, a periodogram estimate of the p
 **zp = zeros(1,(k-1).*M);**
 
 **Pgram(k,:) = [zp P(k,:) zeros(1,abs(length(s)-length(zp)-length(P(k,:))))];**
-
+```
 Filter Bank Generation
 
 This system is designed to model human hearing, and since humans are better at sensing pitch differences at lower frequencies, mel frequency scaling is used to emphasize lower frequency components during feature extraction. First, a filter bank is generated with unity gain triangular filters spaced out on the mel scale. The filter bank start frequency was chosen at 300 Hz and the end frequency was chosen at half the sampling frequency of the input signal. After the start and end frequencies are converted to the mel scale and linearly spaced mel frequency points are computed, the points are reconverted to Hz and rounded to the nearest FFT bin. The formula used to generate the filter bank is shown below in Figure 4. The output filter bank is shown in Figure 5.
