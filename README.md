@@ -1,14 +1,10 @@
-EEC 201
-
+**EEC 201
 Winter 2020
-
 Final Project
-
 Speaker Recognition
+James Nelson and Laura Shimabukuro**
 
-James Nelson and Laura Shimabukuro
-
-![image alt text](images/image_0.jpg width = "48")
+![image alt text](images/image_0.jpg | width = "48")
 
 # Objective
 
@@ -26,15 +22,15 @@ After sampling, the signal undergoes amplitude normalization from -1 to 1 to acc
 
 **Figure 1: Speaker 1 Time Domain Plot**
 ```
-**   for k = 1:numFrames**
+   for k = 1:numFrames
 
-**        frames(k,:) = s(startindex:endindex);**
+        frames(k,:) = s(startindex:endindex);
 
-**        frames(k,:) = frames(k,:);**
+        frames(k,:) = frames(k,:);
 
-**        startindex = startindex+N-M;**
+        startindex = startindex+N-M;
 
-**        endindex = startindex+N-1;**
+        endindex = startindex+N-1;
 ```
 Windowing
 
@@ -44,7 +40,7 @@ Once the signal is split into frames, a hamming window, shown below in Figure 2,
 
 **Figure 2: Hamming Window**
 ```
-**y(k,:) = frames(****k****,:).*w';**
+y(k,:) = frames(****k****,:).*w';
 ```
 Periodogram Generation
 
@@ -54,15 +50,15 @@ To estimate the spectral density of each signal, a periodogram estimate of the p
 
 **Figure 3: Speaker 1 Periodogram**
 ``
-**frames_fft(k,:) = fft(y(k,:));**
+frames_fft(k,:) = fft(y(k,:));
 
-**% compute periodogram**
+% compute periodogram
 
-**P(k,:) = ((abs(exp(-1i.*M.*n.*(k-1)).*frames_fft(k,:))).^2)/N;**
+P(k,:) = ((abs(exp(-1i.*M.*n.*(k-1)).*frames_fft(k,:))).^2)/N;
 
-**zp = zeros(1,(k-1).*M);**
+zp = zeros(1,(k-1).*M);**
 
-**Pgram(k,:) = [zp P(k,:) zeros(1,abs(length(s)-length(zp)-length(P(k,:))))];**
+Pgram(k,:) = [zp P(k,:) zeros(1,abs(length(s)-length(zp)-length(P(k,:))))];
 ```
 Filter Bank Generation
 
