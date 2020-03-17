@@ -4,7 +4,7 @@ Final Project
 Speaker Recognition
 James Nelson and Laura Shimabukuro**
 
-![image alt text](images/image_0.jpg =250x)
+![image alt text](images/image_0.jpg =100x20)
 
 # Objective
 
@@ -18,7 +18,7 @@ In order for the system to perform speech recognition, the key features of each 
 
 After sampling, the signal undergoes amplitude normalization from -1 to 1 to account for sound volume variations. The normalized signal is then split into approximately 30 ms frames (frame length N = 256) with a slight overlap (overlap M = 100) between adjacent frames. The frame overlaps prevent data loss during processing.
 
-![image alt text](images/image_1.jpg)
+![image alt text](images/image_1.jpg) { width: 200px; }
 
 **Figure 1: Speaker 1 Time Domain Plot**
 ```
