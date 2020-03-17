@@ -4,7 +4,7 @@ Final Project
 Speaker Recognition
 James Nelson and Laura Shimabukuro**
 
-![image alt text](images/image_0.jpg | width = "48")
+![image alt text](images/image_0.jpg = 250x)
 
 # Objective
 
