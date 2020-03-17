@@ -16,7 +16,7 @@ The goal of this project is to extract features from human voices to build a sys
 
 # Part 1: Speech Processing and Feature Extraction
 
-Amplitude Normalization and Framing
+**Amplitude Normalization and Framing**
 
 In order for the system to perform speech recognition, the key features of each speaker must first be extracted from the input audio signals. The inputs into the system are .wav files sampled at 12500 Hz. An example time domain signal plot for speaker 1 from the training set is shown below in Figure 1.
 
@@ -38,7 +38,7 @@ After sampling, the signal undergoes amplitude normalization from -1 to 1 to acc
         endindex = startindex+N-1;
 ```
 
-Windowing
+**Windowing**
 
 Once the signal is split into frames, a hamming window, shown below in Figure 2, is applied to each frame to taper the end samples to equal near-zero amplitudes. If the end samples are not tapered to the same amplitude, they will show up as unwanted high frequency components when processed frame by frame through the STFT, because the periodicity of the DFT causes it to treat the disconnected beginning and end points as a discontinuity.
 
@@ -49,7 +49,7 @@ Once the signal is split into frames, a hamming window, shown below in Figure 2,
 ```
 y(k,:) = frames(****k****,:).*w';
 ```
-Periodogram Generation
+**Periodogram Generation**
 
 To estimate the spectral density of each signal, a periodogram estimate of the power spectral density is computed for each signal. First, the Short Time Fourier Transform is applied to each frame by taking an N length FFT of each frame and multiplying the output by a linear phase term to remove time normalization. The frame by frame output of the STFT is squared and averaged over the length of each frame.  Since it is realistically impossible to average the squared spectrum over an infinite interval, squaring over the frame length provides a suitable estimate for the PSD. After generating the frame by frame periodogram estimate, the full signal periodogram is computed by summing all of the individual frame periodograms together. The overlaps are taken into account by zero padding both sides of each frame vector to the correct length and position with respect to the original signal before the full summation. The output periodogram for speaker 1 is shown below in Figure 3.
 
@@ -69,7 +69,7 @@ zp = zeros(1,(k-1).*M);**
 Pgram(k,:) = [zp P(k,:) zeros(1,abs(length(s)-length(zp)-length(P(k,:))))];
 ```
 
-Filter Bank Generation
+**Filter Bank Generation**
 
 This system is designed to model human hearing, and since humans are better at sensing pitch differences at lower frequencies, mel frequency scaling is used to emphasize lower frequency components during feature extraction. First, a filter bank is generated with unity gain triangular filters spaced out on the mel scale. The filter bank start frequency was chosen at 300 Hz and the end frequency was chosen at half the sampling frequency of the input signal. After the start and end frequencies are converted to the mel scale and linearly spaced mel frequency points are computed, the points are reconverted to Hz and rounded to the nearest FFT bin. The formula used to generate the filter bank is shown below in Figure 4. The output filter bank is shown in Figure 5.
 
@@ -80,11 +80,11 @@ This system is designed to model human hearing, and since humans are better at s
 
 # Part 2: Classification Through Vector Quantization
 
-Classification Method
+**Classification Method**
 
 Classification of an input signal to the training set is done through a technique known as vector quantization.  After feature extraction, a signal will have a Mel Cepstrum Coefficient matrix (S) with dimensions the number of mel filters (mN) by number of frames (f).  Mathematically, each signal generates an S fxmN matrix.  During the training phase, the matrix S is shrunk to a codebook matrix C of size c x mN where c is the number of codebooks, or centroids, chosen and mN is still the number mel filters.
 
-Signal Length Normalization
+**Signal Length Normalization**
 
 Since the sum error of a long signal will be more than a short signal, some type of normalization must be done on the length of the signal to account for this.  We looked at two methods of normalizing for length.  Method 1 simply divides the
 
