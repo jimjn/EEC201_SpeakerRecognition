@@ -36,7 +36,7 @@ Windowing
 
 Once the signal is split into frames, a hamming window, shown below in Figure 2, is applied to each frame to taper the end samples to equal near-zero amplitudes. If the end samples are not tapered to the same amplitude, they will show up as unwanted high frequency components when processed frame by frame through the STFT, because the periodicity of the DFT causes it to treat the disconnected beginning and end points as a discontinuity.
 
-<img align="center" width="400" height="400" src="images/image_2.jpg">
+<img align="center" width="400" height="400" src="images/image_2.png">
 
 **Figure 2: Hamming Window**
 ```
@@ -46,7 +46,7 @@ Periodogram Generation
 
 To estimate the spectral density of each signal, a periodogram estimate of the power spectral density is computed for each signal. First, the Short Time Fourier Transform is applied to each frame by taking an N length FFT of each frame and multiplying the output by a linear phase term to remove time normalization. The frame by frame output of the STFT is squared and averaged over the length of each frame.  Since it is realistically impossible to average the squared spectrum over an infinite interval, squaring over the frame length provides a suitable estimate for the PSD. After generating the frame by frame periodogram estimate, the full signal periodogram is computed by summing all of the individual frame periodograms together. The overlaps are taken into account by zero padding both sides of each frame vector to the correct length and position with respect to the original signal before the full summation. The output periodogram for speaker 1 is shown below in Figure 3.
 
-![image alt text](images/image_3.png)
+<img align="center" width="400" height="400" src="images/image_3.png">
 
 **Figure 3: Speaker 1 Periodogram**
 ``
@@ -78,11 +78,11 @@ Signal Length Normalization
 
 Since the sum error of a long signal will be more than a short signal, some type of normalization must be done on the length of the signal to account for this.  We looked at two methods of normalizing for length.  Method 1 simply divides the
 
-![image alt text](images/image_6.jpg)
+<img align="center" width="400" height="400" src="images/image_6.jpg">
 
 **Figure 6. Normalization of Length Method 1**
 
-# ![image alt text](images/image_7.jpg)
+<img align="center" width="400" height="400" src="images/image_7.jpg">
 
 **Figure 7. Normalization of Length Method 2 **
 
@@ -132,17 +132,17 @@ For classification results, we compare the human classification results (Tab. 1)
 
 **Table 1. Human Classification Results**
 
-![image alt text](images/image_8.jpg)
+<img align="center" width="400" height="400" src="images/image_8.jpg">
 
 **Figure 8. Unoptimized System Block Diagram**
 
-![image alt text](images/image_9.jpg)
+<img align="center" width="400" height="400" src="images/image_9.jpg">
 
 **Figure 9. Optimized System Block Diagram**
 
 To show the classification of an arbitrary input, we generate the following plot (Fig 10).
 
-![image alt text](images/image_10.jpg)
+<img align="center" width="400" height="400" src="images/image_10.jpg">
 
 **Figure 10. Example Classification Output**
 
@@ -150,11 +150,11 @@ The x-axis represents the speaker’s numbers.  The y-axis shows the sum of all 
 
 To test the boundary of our classification system, we add various levels of white, Gaussian noise to the input signal until an incorrect classification is made.  The results of the unoptimized system are shown in figure 11.  A correct classification is made with an SNR of 25dB and the system fails with SNR of 20dB.  Results of the optimized system are shown in figure 12.  By adding sinusoidal liftering after the DCT is calculated, the system is accurate to between 15-20dB, closer to the optimal solution of human recognition.
 
-![image alt text](images/image_11.jpg)
+<img align="center" width="400" height="400" src="images/image_11.jpg">
 
 **Figure 11. Unoptimized System Results with Various Levels of Noise**
 
-![image alt text](images/image_12.jpg)
+<img align="center" width="400" height="400" src="images/image_12.jpg">
 
 **Figure 12. Optimized System Results with Various Levels of Noise**
 
@@ -162,7 +162,7 @@ To test the boundary of our classification system, we add various levels of whit
 
 To interface with our training and classification system, a GUI was created using MATLAB AppDesigner.  The GUI allows the user to record a training input and a test input to add to the default 11 speakers.  As the final test on our system, we input 2 different male voices as a training and test input, to verify that different recording conditions from the provided training set did not lead to false classifications.  As shown in figure 13, the test input does not classify to the training input, as expected.  This verifies that the features extracted correspond to the speaker and the recording conditions have a negligible effect on the classification.
 
-![image alt text](images/image_13.png)
+<img align="center" width="400" height="400" src="images/image_13.png">
 
 **Figure 13. MATLAB Graphical User Interface (GUI)**
 
