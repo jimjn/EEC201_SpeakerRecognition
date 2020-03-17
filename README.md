@@ -5,7 +5,7 @@ Speaker Recognition
 James Nelson and Laura Shimabukuro**
 
 ![image alt text](images/image_0.jpg { width: 200px; })
-
+<img align="left" width="100" height="100" src="images/image_0.jpg">
 # Objective
 
 The goal of this project is to extract features from human voices to build a system to classify a set of speakers.  Mel-Frequency Cepstrum Coefficients (MFCC) were used as features and Vector Quantization (VQ) was used as the training/classification system.
