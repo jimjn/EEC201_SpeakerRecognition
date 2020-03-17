@@ -73,9 +73,10 @@ Filter Bank Generation
 
 This system is designed to model human hearing, and since humans are better at sensing pitch differences at lower frequencies, mel frequency scaling is used to emphasize lower frequency components during feature extraction. First, a filter bank is generated with unity gain triangular filters spaced out on the mel scale. The filter bank start frequency was chosen at 300 Hz and the end frequency was chosen at half the sampling frequency of the input signal. After the start and end frequencies are converted to the mel scale and linearly spaced mel frequency points are computed, the points are reconverted to Hz and rounded to the nearest FFT bin. The formula used to generate the filter bank is shown below in Figure 4. The output filter bank is shown in Figure 5.
 
-<img align="left" width="300" height="300" src="images/image_3.png">         <img align="right" width="300" height="300" src="images/image_4.png">
+![image alt text](unages/image_4.png)          ![image alt text](images/image_5.png)
 
 **Figure 4: Filter Bank Formula                      Figure 5: Filter Bank Plots**
+
 
 # Part 2: Classification Through Vector Quantization
 
@@ -87,11 +88,11 @@ Signal Length Normalization
 
 Since the sum error of a long signal will be more than a short signal, some type of normalization must be done on the length of the signal to account for this.  We looked at two methods of normalizing for length.  Method 1 simply divides the
 
-<img align="center" width="400" height="400" src="images/image_6 (1).jpg">
+![image alt text](images/image_6 (1).jpg)
 
 **Figure 6. Normalization of Length Method 1**
 
-<img align="center" width="400" height="400" src="images/image_7.jpg">
+![image alt text](image_7.jpg)
 
 **Figure 7. Normalization of Length Method 2 **
 
