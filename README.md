@@ -73,7 +73,7 @@ Filter Bank Generation
 
 This system is designed to model human hearing, and since humans are better at sensing pitch differences at lower frequencies, mel frequency scaling is used to emphasize lower frequency components during feature extraction. First, a filter bank is generated with unity gain triangular filters spaced out on the mel scale. The filter bank start frequency was chosen at 300 Hz and the end frequency was chosen at half the sampling frequency of the input signal. After the start and end frequencies are converted to the mel scale and linearly spaced mel frequency points are computed, the points are reconverted to Hz and rounded to the nearest FFT bin. The formula used to generate the filter bank is shown below in Figure 4. The output filter bank is shown in Figure 5.
 
-<img align="left" width="400" height="400" src="images/image_3.png">         <img align="right" width="400" height="400" src="images/image_3.png">
+<img align="left" width="300" height="300" src="images/image_3.png">         <img align="right" width="300" height="300" src="images/image_4.png">
 
 **Figure 4: Filter Bank Formula                      Figure 5: Filter Bank Plots**
 
@@ -87,7 +87,7 @@ Signal Length Normalization
 
 Since the sum error of a long signal will be more than a short signal, some type of normalization must be done on the length of the signal to account for this.  We looked at two methods of normalizing for length.  Method 1 simply divides the
 
-<img align="center" width="400" height="400" src="images/image_6.jpg">
+<img align="center" width="400" height="400" src="images/image_6 (1).jpg">
 
 **Figure 6. Normalization of Length Method 1**
 
@@ -159,11 +159,11 @@ The x-axis represents the speaker’s numbers.  The y-axis shows the sum of all 
 
 To test the boundary of our classification system, we add various levels of white, Gaussian noise to the input signal until an incorrect classification is made.  The results of the unoptimized system are shown in figure 11.  A correct classification is made with an SNR of 25dB and the system fails with SNR of 20dB.  Results of the optimized system are shown in figure 12.  By adding sinusoidal liftering after the DCT is calculated, the system is accurate to between 15-20dB, closer to the optimal solution of human recognition.
 
-![image alt text](image_11.jpg)
+![image alt text](images/image_11.jpg)
 
 **Figure 11. Unoptimized System Results with Various Levels of Noise**
 
-![image alt text](image_12.jpg)
+![image alt text](images/image_12.jpg)
 
 **Figure 12. Optimized System Results with Various Levels of Noise**
 
@@ -171,7 +171,7 @@ To test the boundary of our classification system, we add various levels of whit
 
 To interface with our training and classification system, a GUI was created using MATLAB AppDesigner.  The GUI allows the user to record a training input and a test input to add to the default 11 speakers.  As the final test on our system, we input 2 different male voices as a training and test input, to verify that different recording conditions from the provided training set did not lead to false classifications.  As shown in figure 13, the test input does not classify to the training input, as expected.  This verifies that the features extracted correspond to the speaker and the recording conditions have a negligible effect on the classification.
 
-![image alt text](image_13.png)
+![image alt text](images/image_13.png)
 
 **Figure 13. MATLAB Graphical User Interface (GUI)**
 
