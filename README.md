@@ -1,10 +1,14 @@
 **EEC 201**
+
 **Winter 2020**
+
 **Final Project**
+
 **Speaker Recognition**
+
 **James Nelson and Laura Shimabukuro**
 
-<img align="center" width="300" height="100" src="images/image_0.jpg">
+<img align="center" width="300" height="150" src="images/image_0.jpg">
 
 # Objective
 
@@ -21,6 +25,7 @@ After sampling, the signal undergoes amplitude normalization from -1 to 1 to acc
 <img align="center" width="400" height="400" src="images/image_1.jpg">
 
 **Figure 1: Speaker 1 Time Domain Plot**
+
 ```
    for k = 1:numFrames
 
@@ -32,6 +37,7 @@ After sampling, the signal undergoes amplitude normalization from -1 to 1 to acc
 
         endindex = startindex+N-1;
 ```
+
 Windowing
 
 Once the signal is split into frames, a hamming window, shown below in Figure 2, is applied to each frame to taper the end samples to equal near-zero amplitudes. If the end samples are not tapered to the same amplitude, they will show up as unwanted high frequency components when processed frame by frame through the STFT, because the periodicity of the DFT causes it to treat the disconnected beginning and end points as a discontinuity.
@@ -39,6 +45,7 @@ Once the signal is split into frames, a hamming window, shown below in Figure 2,
 <img align="center" width="400" height="400" src="images/image_2.png">
 
 **Figure 2: Hamming Window**
+
 ```
 y(k,:) = frames(****k****,:).*w';
 ```
@@ -49,7 +56,8 @@ To estimate the spectral density of each signal, a periodogram estimate of the p
 <img align="center" width="400" height="400" src="images/image_3.png">
 
 **Figure 3: Speaker 1 Periodogram**
-``
+
+```
 frames_fft(k,:) = fft(y(k,:));
 
 % compute periodogram
@@ -60,6 +68,7 @@ zp = zeros(1,(k-1).*M);**
 
 Pgram(k,:) = [zp P(k,:) zeros(1,abs(length(s)-length(zp)-length(P(k,:))))];
 ```
+
 Filter Bank Generation
 
 This system is designed to model human hearing, and since humans are better at sensing pitch differences at lower frequencies, mel frequency scaling is used to emphasize lower frequency components during feature extraction. First, a filter bank is generated with unity gain triangular filters spaced out on the mel scale. The filter bank start frequency was chosen at 300 Hz and the end frequency was chosen at half the sampling frequency of the input signal. After the start and end frequencies are converted to the mel scale and linearly spaced mel frequency points are computed, the points are reconverted to Hz and rounded to the nearest FFT bin. The formula used to generate the filter bank is shown below in Figure 4. The output filter bank is shown in Figure 5.
