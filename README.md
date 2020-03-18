@@ -75,7 +75,7 @@ This system is designed to model human hearing, and since humans are better at s
 
 <img align="left" width="400" height="400" src="images/image_4.png">
 <img align="right" width="400" height="400" src="images/image_5.png">
-![image alt text]**Figure 4: Filter Bank Formula**  **Figure 5: Filter Bank Plots**
+![**Figure 4: Filter Bank Formula**] ![**Figure 5: Filter Bank Plots**] 
 
                       
 
