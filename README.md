@@ -22,7 +22,7 @@ In order for the system to perform speech recognition, the key features of each 
 
 After sampling, the signal undergoes amplitude normalization from -1 to 1 (center at 0 and standard deviation of 1) to account for sound volume variations. The normalized signal is then split into approximately 30 ms frames (frame length N = 256) with a slight overlap (overlap M = 100) between adjacent frames. The frame overlaps prevent data loss during processing.
 
-![image alt text](images/image_1.jpg)
+<img src="images/image_1.jpg" width="500" height="500">
 
 **Figure 1: Speaker 1 Time Domain Plot**
 
@@ -42,7 +42,7 @@ Windowing
 
 Once the signal is split into frames, a hamming window, shown below in Figure 2, is applied to each frame to taper the end samples to equal near-zero amplitudes. If the end samples are not tapered to the same amplitude, they will show up as unwanted high frequency components when processed frame by frame through the STFT, because the periodicity of the DFT causes it to treat the disconnected beginning and end points as a discontinuity.
 
-![image alt text](images/image_2.png)
+<img src="images/image_2.png" width="500" height="500">
 
 **Figure 2: Hamming Window**
 
@@ -54,7 +54,7 @@ Periodogram Generation
 
 To estimate the spectral density of each signal, a periodogram estimate of the power spectral density is computed for each signal. First, the Short Time Fourier Transform is applied to each frame by taking an N length FFT of each frame and multiplying the output by a linear phase term to remove time normalization. The frame by frame output of the STFT is squared and averaged over the length of each frame.  Since it is realistically impossible to average the squared spectrum over an infinite interval, squaring over the frame length provides a suitable estimate for the PSD. After generating the frame by frame periodogram estimate, the full signal periodogram is computed by summing all of the individual frame periodograms together. The overlaps are taken into account by zero padding both sides of each frame vector to the correct length and position with respect to the original signal before the full summation. The output periodogram for speaker 1 is shown below in Figure 3.
 
-![image alt text](images/image_3.png)
+<img src="images/image_3.png" width="500" height="500">
 
 **Figure 3: Speaker 1 Periodogram**
 
@@ -140,7 +140,7 @@ To extract the MFCC feature array, the filter bank is multiplied to each frame. 
 
 The resulting spectrogram plot of the MFCC array for speaker 1 is shown below in Figure 6.
 
-![image alt text](images/image_6.jpg)
+<img src="images/image_6.jpg" width="500" height="500">
 
 **Figure 6: Speaker 1 Spectrogram**
 
@@ -245,17 +245,17 @@ For classification results, we compare the human classification results (Tab. 1)
 
 **Table 1. Human Classification Results**
 
-![image alt text](images/image_15.jpg)
+<img src="images/image_15.jpg" width="800" height="500">
 
 **Figure 14. Unoptimized System Block Diagram**
 
-![image alt text](images/image_16.jpg)
+<img src="images/image_16.jpg" width="800" height="500">
 
 **Figure 15. Optimized System Block Diagram**
 
 To show the classification of an arbitrary input, we generate the following plot (Fig 16).
 
-![image alt text](images/image_17.jpg)
+<img src="images/image_17.jpg" width="400" height="400">
 
 **Figure 16. Example Classification Output**
 
