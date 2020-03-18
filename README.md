@@ -371,7 +371,7 @@ Additional tests were performed with speech files found online. Five different a
 
 **Table 2. Classification Results for Outside Sourced Speakers**
 
-![image alt text](images/image_22.jpg)           ![image alt text](images/image_23.jpg)
+<img src="images/image_22.jpg" width="400" height="400">           ![image alt text](images/image_23.jpg)
 
 ![image alt text](images/image_24.jpg)             ![image alt text](images/image_25.jpg)
 
