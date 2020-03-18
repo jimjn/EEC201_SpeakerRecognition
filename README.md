@@ -8,7 +8,7 @@ Speaker Recognition
 
 James Nelson and Laura Shimabukuro
 
-![image alt text](images/image_0.jpg)
+<img src="images/image_22.jpg" width="400" height="200">
 
 # Objective
 
@@ -74,7 +74,7 @@ Filter Bank Generation
 
 This system is designed to model human hearing, and since humans are better at sensing pitch differences at lower frequencies, mel frequency scaling is used to emphasize lower frequency components during feature extraction. First, a filter bank is generated with unity gain triangular filters spaced out on the mel scale. The filter bank start frequency was chosen at 300 Hz and the end frequency was chosen at half the sampling frequency of the input signal. After the start and end frequencies are converted to the mel scale and linearly spaced mel frequency points are computed, the points are reconverted to Hz and rounded to the nearest FFT bin. The formula used to generate the filter bank is shown below in Figure 4. The output filter bank is shown in Figure 5.
 
-![image alt text](images/image_4.png)          ![image alt text](images/image_5.png)
+<img src="images/image_4.jpg" width="400" height="400"><img src="images/image_5.jpg" width="400" height="400">
 
 **Figure 4: Filter Bank Formula                      Figure 5: Filter Bank Plots**
 
@@ -160,7 +160,7 @@ To improve speech recognition, an additional variance normalization step was tak
 
 ![image alt text](images/image_7.png)
 
-![image alt text](images/image_8.jpg)    ![image alt text](images/image_9.jpg)
+<img src="images/image_8.jpg" width="400" height="400"><img src="images/image_9.jpg" width="400" height="400">
 
 **Figure 7: Speaker 1 w/o Sinusoidal Liftering               Figure 8: Speaker 1 w/ Sinusoidal Liftering**
 
@@ -173,7 +173,7 @@ mfcc_array = w.*mfcc_array;
 
 The amplitude normalization step taken in the beginning also showed a noticeable improvement in the sharpness of the outputted spectrogram, as shown below for speaker 1.
 
-![image alt text](images/image_10.jpg)        ![image alt text](images/image_11.jpg)
+<img src="images/image_10.jpg" width="400" height="400"><img src="images/image_11.jpg" width="400" height="400">
 
 **Figure 9: Speaker 1 w/o Amplitude Normalization         Figure 10: Speaker 1 w/ Amplitude Normalization**
 
@@ -263,7 +263,7 @@ The x-axis represents the speaker’s numbers.  The y-axis shows the sum of all 
 
 To test the boundary of our classification system, we add various levels of white, Gaussian noise to the input signal until an incorrect classification is made.  The results of the unoptimized system are shown in figure 17.  A correct classification is made with an SNR of 25dB and the system fails with SNR of 20dB.  Results of the optimized system are shown in figure 18 and in the cluster plots below. The addition of sinusoidal liftering in the feature extraction process increases the clustering spread, thus making it easier to set divisions between centroids and identify the best fit. By adding sinusoidal liftering after the DCT is calculated, the system is accurate to between 15-20dB, closer to the optimal solution of human recognition.
 
-![image alt text](images/image_18.png)         ![image alt text](images/image_19.png)
+<img src="images/image_18.jpg" width="400" height="400"><img src="images/image_19.jpg" width="400" height="400">
 
 ![image alt text](images/image_20.jpg)
 
@@ -371,11 +371,11 @@ Additional tests were performed with speech files found online. Five different a
 
 **Table 2. Classification Results for Outside Sourced Speakers**
 
-<img src="images/image_22.jpg" width="400" height="400">           ![image alt text](images/image_23.jpg)
+<img src="images/image_22.jpg" width="400" height="400"><img src="images/image_23.jpg" width="400" height="400">
 
-![image alt text](images/image_24.jpg)             ![image alt text](images/image_25.jpg)
+<img src="images/image_24.jpg" width="400" height="400"><img src="images/image_25.jpg" width="400" height="400">
 
-![image alt text](images/image_26.jpg)
+<img src="images/image_26.jpg" width="400" height="400">
 
 # Part 4: MATLAB Graphical User Interface (GUI)
 
