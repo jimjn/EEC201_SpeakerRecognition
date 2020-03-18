@@ -73,9 +73,10 @@ Pgram(k,:) = [zp P(k,:) zeros(1,abs(length(s)-length(zp)-length(P(k,:))))];
 
 This system is designed to model human hearing, and since humans are better at sensing pitch differences at lower frequencies, mel frequency scaling is used to emphasize lower frequency components during feature extraction. First, a filter bank is generated with unity gain triangular filters spaced out on the mel scale. The filter bank start frequency was chosen at 300 Hz and the end frequency was chosen at half the sampling frequency of the input signal. After the start and end frequencies are converted to the mel scale and linearly spaced mel frequency points are computed, the points are reconverted to Hz and rounded to the nearest FFT bin. The formula used to generate the filter bank is shown below in Figure 4. The output filter bank is shown in Figure 5.
 
-![image alt text](unages/image_4.png)          ![image alt text](images/image_5.png)
+<img align="left" width="400" height="400" src="images/image_4.png">
+<img align="right" width="400" height="400" src="images/image_5.png">
 
-**Figure 4: Filter Bank Formula                      Figure 5: Filter Bank Plots**
+**Figure 4: Filter Bank Formula**                      **Figure 5: Filter Bank Plots**
 
 
 # Part 2: Classification Through Vector Quantization
