@@ -27,15 +27,15 @@ After sampling, the signal undergoes amplitude normalization from -1 to 1 (cente
 **Figure 1: Speaker 1 Time Domain Plot**
 
 ```
-**   for k = 1:numFrames**
+   for k = 1:numFrames
 
-**        frames(k,:) = s(startindex:endindex);**
+        frames(k,:) = s(startindex:endindex);
 
-**        frames(k,:) = frames(k,:);**
+        frames(k,:) = frames(k,:);
 
-**        startindex = startindex+N-M;**
+        startindex = startindex+N-M;
 
-**        endindex = startindex+N-1;**
+        endindex = startindex+N-1;
 ```
 
 Windowing
@@ -47,7 +47,7 @@ Once the signal is split into frames, a hamming window, shown below in Figure 2,
 **Figure 2: Hamming Window**
 
 ```
-**y(k,:) = frames(****k****,:).*w';**
+y(k,:) = frames(****k****,:).*w';
 ```
 
 Periodogram Generation
@@ -59,15 +59,15 @@ To estimate the spectral density of each signal, a periodogram estimate of the p
 **Figure 3: Speaker 1 Periodogram**
 
 ```
-**frames_fft(k,:) = fft(y(k,:));**
+frames_fft(k,:) = fft(y(k,:));
 
-**% compute periodogram**
+% compute periodogram
 
-**P(k,:) = ((abs(exp(-1i.*M.*n.*(k-1)).*frames_fft(k,:))).^2)/N;**
+P(k,:) = ((abs(exp(-1i.*M.*n.*(k-1)).*frames_fft(k,:))).^2)/N;
 
-**zp = zeros(1,(k-1).*M);**
+zp = zeros(1,(k-1).*M);
 
-**Pgram(k,:) = [zp P(k,:) zeros(1,abs(length(s)-length(zp)-length(P(k,:))))];**
+Pgram(k,:) = [zp P(k,:) zeros(1,abs(length(s)-length(zp)-length(P(k,:))))];
 ```
 
 Filter Bank Generation
@@ -79,63 +79,59 @@ This system is designed to model human hearing, and since humans are better at s
 **Figure 4: Filter Bank Formula                      Figure 5: Filter Bank Plots**
 
 ```
-**start_freq = 300;**
+start_freq = 300;
 
-**end_freq = fs/2;**
+end_freq = fs/2;
 
-**m_start = 2595.*log10(1+start_freq/700);**
+m_start = 2595.*log10(1+start_freq/700);
 
-**m_end = 2595.*log10(1+end_freq./700);**
+m_end = 2595.*log10(1+end_freq./700);
 
-**m = linspace(m_start,m_end,nfilt+2);**
+m = linspace(m_start,m_end,nfilt+2);
 
-**f_Hz = 700*(10.^(m./2595)-1);**
+f_Hz = 700*(10.^(m./2595)-1);
 
-**f_bin = floor((2*N+1).*f_Hz/fs);**
+f_bin = floor((2*N+1).*f_Hz/fs);
 ```
 
-**    **
 ```
+% generate filter bank**
 
-**% generate filter bank**
+fbank = zeros(20,256);
 
-**fbank = zeros(20,256);**
+for mel_k = 1:nfilt
 
-**for mel_k = 1:nfilt**
+        f_m_left = f_bin(mel_k);
 
-**        f_m_left = f_bin(mel_k);**
+        f_m_center = f_bin(mel_k+1);
 
-**        f_m_center = f_bin(mel_k+1);**
+        f_m_right = f_bin(mel_k+2);
 
-**        f_m_right = f_bin(mel_k+2);**
+        for k = f_m_left:f_m_center
 
-**        **
+            fbank(mel_k,k) = (k-f_bin(mel_k))/(f_bin(mel_k+1)-f_bin(mel_k));
 
-**        for k = f_m_left:f_m_center**
+            if fbank(mel_k,k)<=0
 
-**            fbank(mel_k,k) = (k-f_bin(mel_k))/(f_bin(mel_k+1)-f_bin(mel_k));**
+                fbank(mel_k,k)=0;
 
-**            if fbank(mel_k,k)<=0**
+            end
 
-**                fbank(mel_k,k)=0;**
+        end
 
-**            end**
+        for k = f_m_center:f_m_right
 
-**        end**
+            fbank(mel_k,k) = (f_bin(mel_k+2)-k)/(f_bin(mel_k+2)-f_bin(mel_k+1));
 
-**        for k = f_m_center:f_m_right**
+            if fbank(mel_k,k)<=0
 
-**            fbank(mel_k,k) = (f_bin(mel_k+2)-k)/(f_bin(mel_k+2)-f_bin(mel_k+1));**
+                fbank(mel_k,k)=0;
 
-   **         if fbank(mel_k,k)<=0**
+            end
 
-**                fbank(mel_k,k)=0;**
+        end
 
-**            end**
-
-**        end**
-
-**end**
+end
 ```
 
 MFCC Feature Vector Extraction
@@ -149,13 +145,13 @@ The resulting spectrogram plot of the MFCC array for speaker 1 is shown below in
 **Figure 6: Speaker 1 Spectrogram**
 
 ```
-**mfcc_array = zeros(numFrames,nfilt);**
+mfcc_array = zeros(numFrames,nfilt);
 
-**    for k = 1:numFrames**
+    for k = 1:numFrames
 
-**        mfcc_array(k,:) = dct(10*log10(fbank*P(k,:)'));**
+        mfcc_array(k,:) = dct(10*log10(fbank*P(k,:)'));
 
-**    end **
+    end
 ```
 
 Speech Processing Optimization
@@ -164,20 +160,20 @@ To improve speech recognition, an additional variance normalization step was tak
 
 ![image alt text](images/image_7.png)
 
-![image alt text](images/image_8.jpg)**    **![image alt text](images/image_9.jpg)
+![image alt text](images/image_8.jpg)    ![image alt text](images/image_9.jpg)
 
 **Figure 7: Speaker 1 w/o Sinusoidal Liftering               Figure 8: Speaker 1 w/ Sinusoidal Liftering**
 
 ```
-**w=1+(15/2)*sin((1:nfilt)*pi/15);**
+w=1+(15/2)*sin((1:nfilt)*pi/15);
 
-**mfcc_array = w.*mfcc_array;**
+mfcc_array = w.*mfcc_array;
 ```
 
 
 The amplitude normalization step taken in the beginning also showed a noticeable improvement in the sharpness of the outputted spectrogram, as shown below for speaker 1.
 
-![image alt text](images/image_10.jpg)**        **![image alt text](images/image_11.jpg)
+![image alt text](images/image_10.jpg)        ![image alt text](images/image_11.jpg)
 
 **Figure 9: Speaker 1 w/o Amplitude Normalization         Figure 10: Speaker 1 w/ Amplitude Normalization**
 
